@@ -32,6 +32,11 @@ const categoryNames: Record<string, string> = {
     rice: "চাল",
     chaal: "চাল",
     chal: "চাল",
+
+    mach: "মাছ",
+    mangsho: "মাংস",
+    mosla: "মসলা",
+
     tel: "তেল",
     oil: "তেল",
     "soybean-oil": "সয়াবিন তেল",
@@ -137,17 +142,46 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
 
     if (!res.ok) {
         return (
-            <main className="mx-auto w-full max-w-5xl px-4 py-8">
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                    পণ্যটি পাওয়া যায়নি
-                </h1>
+            <main className="flex min-h-[60vh] items-center justify-center px-4 py-12">
+                <section className="w-full max-w-lg rounded-3xl border border-green-100 bg-white px-6 py-10 text-center shadow-lg shadow-green-100/50 dark:border-gray-700 dark:bg-gray-900 dark:shadow-none sm:px-10">
+                    <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-green-50 text-5xl dark:bg-green-950">
+                        🛒
+                    </div>
 
-                <Link
-                    href="/"
-                    className="mt-5 inline-block text-green-700 hover:underline dark:text-green-400"
-                >
-                    হোম পেজে ফিরে যান
-                </Link>
+                    <p className="mt-6 text-sm font-bold tracking-widest text-green-700 dark:text-green-400">
+                        404 · পণ্য পাওয়া যায়নি
+                    </p>
+
+                    <h1 className="mt-3 text-2xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-3xl">
+                        দুঃখিত! পণ্যটি খুঁজে পাওয়া যায়নি
+                    </h1>
+
+                    <p className="mx-auto mt-4 max-w-sm text-sm leading-7 text-gray-600 dark:text-gray-300">
+                        পণ্যের লিংকটি ভুল হতে পারে অথবা পণ্যটি বর্তমানে উপলব্ধ নেই।
+                        অনুগ্রহ করে হোম পেজ থেকে আপনার পছন্দের পণ্যটি খুঁজে নিন।
+                    </p>
+
+                    <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                        <Link
+                            href="/"
+                            className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-700 px-6 py-3 font-bold text-white transition hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-200 dark:focus:ring-green-900"
+                        >
+                            <span>⌂</span>
+                            হোম পেজে ফিরে যান
+                        </Link>
+
+                        <Link
+                            href="/"
+                            className="inline-flex items-center justify-center rounded-xl border border-gray-300 px-6 py-3 font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800"
+                        >
+                            পণ্য খুঁজুন
+                        </Link>
+                    </div>
+
+                    <p className="mt-8 text-xs text-gray-400">
+                        বাজার দর · প্রতিদিনের বাজারদর জানুন
+                    </p>
+                </section>
             </main>
         );
     }
@@ -156,29 +190,24 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
 
     const markets = Array.isArray(product.markets)
         ? product.markets.filter(
-            (market) =>
-                typeof market.market === "string" &&
-                typeof market.division === "string" &&
-                Number.isFinite(market.min) &&
-                Number.isFinite(market.max),
-        )
+              (market) =>
+                  typeof market.market === "string" &&
+                  typeof market.division === "string" &&
+                  Number.isFinite(market.min) &&
+                  Number.isFinite(market.max),
+          )
         : [];
 
-    const normalizedCategory = (
-        product.category || ""
-    ).trim().toLowerCase();
+    const normalizedCategory = (product.category || "").trim().toLowerCase();
 
     const unit = ["tel", "oil"].includes(normalizedCategory)
         ? "লিটার"
         : getUnit(product.unit || "");
 
     const category =
-        getCategoryName(product.categoryBn || product.category) ||
-        "বাজারদর";
+        getCategoryName(product.categoryBn || product.category) || "বাজারদর";
 
-    const categorySlug = (
-        product.category || product.categoryBn || ""
-    )
+    const categorySlug = (product.category || product.categoryBn || "")
         .trim()
         .toLowerCase();
 
@@ -188,23 +217,16 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
     const changeColor = isUp
         ? "text-red-600 dark:text-red-400"
         : isDown
-            ? "text-green-700 dark:text-green-400"
-            : "text-gray-500 dark:text-gray-400";
+          ? "text-green-700 dark:text-green-400"
+          : "text-gray-500 dark:text-gray-400";
 
     const changeAmount =
         product.change.dir === "flat"
             ? 0
             : (product.today * Math.abs(product.change.pct)) /
-            (100 +
-                (isUp
-                    ? product.change.pct
-                    : -product.change.pct));
+              (100 + (isUp ? product.change.pct : -product.change.pct));
 
-    const changeText = isUp
-        ? "বেড়েছে"
-        : isDown
-            ? "কমেছে"
-            : "অপরিবর্তিত";
+    const changeText = isUp ? "বেড়েছে" : isDown ? "কমেছে" : "অপরিবর্তিত";
 
     const getMarketAverage = (market: Market) =>
         market.avg ?? (market.min + market.max) / 2;
@@ -222,37 +244,36 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
     const averagePrice =
         markets.length > 0
             ? markets.reduce(
-                (total, market) =>
-                    total + getMarketAverage(market),
-                0,
-            ) / markets.length
+                  (total, market) => total + getMarketAverage(market),
+                  0,
+              ) / markets.length
             : 0;
 
     return (
         <main className="mx-auto w-full max-w-5xl px-4 py-8">
             <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                <Link
-                    href="/"
-                    className="hover:text-green-700 dark:hover:text-green-400"
-                >
-                    হোম
-                </Link>
+    <Link
+        href="/"
+        className="text-gray-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
+    >
+        হোম
+    </Link>
 
-                <span>›</span>
+    <span>›</span>
 
-                <Link
-                    href={`/category/${categorySlug}`}
-                    className="hover:text-green-700 dark:hover:text-green-400"
-                >
-                    {category}
-                </Link>
+    <Link
+        href={`/category/${categorySlug}`}
+        className="text-gray-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
+    >
+        {category}
+    </Link>
 
-                <span>›</span>
+    <span>›</span>
 
-                <span className="font-semibold text-gray-900 dark:text-gray-100">
-                    {product.nameBn}
-                </span>
-            </nav>
+    <span className="font-semibold text-gray-900 dark:text-green-400">
+        {product.nameBn}
+    </span>
+</nav>
 
             <section className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:p-6">
                 <div className="grid grid-cols-[minmax(0,1fr)_112px] items-center gap-3 sm:grid-cols-[minmax(0,1fr)_160px] sm:gap-6">
@@ -301,10 +322,7 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                             </span>
 
                             <span className="text-sm text-black dark:text-white">
-                                {formatNumber(
-                                    Math.abs(product.change.pct),
-                                )}
-                                %
+                                {formatNumber(Math.abs(product.change.pct))}%
                             </span>
                         </div>
                     </div>
@@ -378,21 +396,11 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                             <table className="w-full min-w-[620px] text-left text-sm">
                                 <thead className="bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200">
                                     <tr>
-                                        <th className="px-4 py-3">
-                                            বাজার
-                                        </th>
-                                        <th className="px-4 py-3">
-                                            বিভাগ
-                                        </th>
-                                        <th className="px-4 py-3">
-                                            সর্বনিম্ন
-                                        </th>
-                                        <th className="px-4 py-3">
-                                            সর্বাধিক
-                                        </th>
-                                        <th className="px-4 py-3">
-                                            গড়
-                                        </th>
+                                        <th className="px-4 py-3">বাজার</th>
+                                        <th className="px-4 py-3">বিভাগ</th>
+                                        <th className="px-4 py-3">সর্বনিম্ন</th>
+                                        <th className="px-4 py-3">সর্বাধিক</th>
+                                        <th className="px-4 py-3">গড়</th>
                                     </tr>
                                 </thead>
 
@@ -400,10 +408,11 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                                     {markets.map((market, index) => (
                                         <tr
                                             key={`${market.market}-${index}`}
-                                            className={`border-t border-gray-300 transition-colors hover:bg-green-300 dark:border-gray-700 dark:hover:bg-green-950 ${index % 2 === 0
+                                            className={`border-t border-gray-300 transition-colors hover:bg-green-300 dark:border-gray-700 dark:hover:bg-green-950 ${
+                                                index % 2 === 0
                                                     ? "bg-white dark:bg-gray-900"
                                                     : "bg-green-50 dark:bg-gray-800"
-                                                }`}
+                                            }`}
                                         >
                                             <td className="px-4 py-3 font-bold text-gray-900 dark:text-gray-100">
                                                 {market.market}
