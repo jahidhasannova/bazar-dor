@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 type Market = {
@@ -190,12 +189,12 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
 
     const markets = Array.isArray(product.markets)
         ? product.markets.filter(
-              (market) =>
-                  typeof market.market === "string" &&
-                  typeof market.division === "string" &&
-                  Number.isFinite(market.min) &&
-                  Number.isFinite(market.max),
-          )
+            (market) =>
+                typeof market.market === "string" &&
+                typeof market.division === "string" &&
+                Number.isFinite(market.min) &&
+                Number.isFinite(market.max),
+        )
         : [];
 
     const normalizedCategory = (product.category || "").trim().toLowerCase();
@@ -217,14 +216,14 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
     const changeColor = isUp
         ? "text-red-600 dark:text-red-400"
         : isDown
-          ? "text-green-700 dark:text-green-400"
-          : "text-gray-500 dark:text-gray-400";
+            ? "text-green-700 dark:text-green-400"
+            : "text-gray-500 dark:text-gray-400";
 
     const changeAmount =
         product.change.dir === "flat"
             ? 0
             : (product.today * Math.abs(product.change.pct)) /
-              (100 + (isUp ? product.change.pct : -product.change.pct));
+            (100 + (isUp ? product.change.pct : -product.change.pct));
 
     const changeText = isUp ? "বেড়েছে" : isDown ? "কমেছে" : "অপরিবর্তিত";
 
@@ -244,36 +243,36 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
     const averagePrice =
         markets.length > 0
             ? markets.reduce(
-                  (total, market) => total + getMarketAverage(market),
-                  0,
-              ) / markets.length
+                (total, market) => total + getMarketAverage(market),
+                0,
+            ) / markets.length
             : 0;
 
     return (
         <main className="mx-auto w-full max-w-5xl px-4 py-8">
             <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-    <Link
-        href="/"
-        className="text-gray-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
-    >
-        হোম
-    </Link>
+                <Link
+                    href="/"
+                    className="text-gray-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
+                >
+                    হোম
+                </Link>
 
-    <span>›</span>
+                <span>›</span>
 
-    <Link
-        href={`/category/${categorySlug}`}
-        className="text-gray-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
-    >
-        {category}
-    </Link>
+                <Link
+                    href={`/category/${categorySlug}`}
+                    className="text-gray-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
+                >
+                    {category}
+                </Link>
 
-    <span>›</span>
+                <span>›</span>
 
-    <span className="font-semibold text-gray-900 dark:text-green-400">
-        {product.nameBn}
-    </span>
-</nav>
+                <span className="font-semibold text-gray-900 dark:text-green-400">
+                    {product.nameBn}
+                </span>
+            </nav>
 
             <section className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:p-6">
                 <div className="grid grid-cols-[minmax(0,1fr)_112px] items-center gap-3 sm:grid-cols-[minmax(0,1fr)_160px] sm:gap-6">
@@ -408,11 +407,10 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                                     {markets.map((market, index) => (
                                         <tr
                                             key={`${market.market}-${index}`}
-                                            className={`border-t border-gray-300 transition-colors hover:bg-green-300 dark:border-gray-700 dark:hover:bg-green-950 ${
-                                                index % 2 === 0
+                                            className={`border-t border-gray-300 transition-colors hover:bg-green-300 dark:border-gray-700 dark:hover:bg-green-950 ${index % 2 === 0
                                                     ? "bg-white dark:bg-gray-900"
                                                     : "bg-green-50 dark:bg-gray-800"
-                                            }`}
+                                                }`}
                                         >
                                             <td className="px-4 py-3 font-bold text-gray-900 dark:text-gray-100">
                                                 {market.market}

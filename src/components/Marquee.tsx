@@ -1,4 +1,3 @@
-
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 
@@ -21,7 +20,7 @@ const Marquee = async () => {
 
   return (
     <div className="my-0 w-full overflow-hidden border-y border-gray-200 bg-green-100 dark:border-gray-700 dark:bg-gray-800">
-      <MarqueeText className="w-full" direction="right" duration={10}>
+      <MarqueeText className="w-full" direction="right" duration={12}>
         {headlines.map((h) => (
           <span
             key={h.id}

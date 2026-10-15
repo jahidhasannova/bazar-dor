@@ -20,7 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="bn"
       className={`${notoSerifBengali.className} h-full antialiased`}
     >
-     
+
       <body className="flex min-h-screen flex-col bg-green-50/50">
         <Header />
         <Marquee />

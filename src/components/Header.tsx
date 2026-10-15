@@ -1,13 +1,22 @@
-
-import Image from "next/image";
 import NavLinks from "./NavLinks";
 import { Suspense } from "react";
+import { connection } from "next/server";
 
-const Header = () => {
+const HeaderDate = async () => {
+  await connection();
+
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });
 
+  return (
+    <p className="text-sm text-gray-500 dark:text-gray-400">
+      {date}
+    </p>
+  );
+};
+
+const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 py-4">
@@ -21,9 +30,10 @@ const Header = () => {
               <div className="text-3xl font-bold text-gray-800 dark:text-gray-100">
                 বাজার দর
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {date}
-              </p>
+
+              <Suspense fallback={<p className="text-sm text-gray-500">তারিখ লোড হচ্ছে...</p>}>
+                <HeaderDate />
+              </Suspense>
             </div>
           </div>
 

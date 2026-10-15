@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 export default function NotFound() {
@@ -26,13 +25,13 @@ export default function NotFound() {
                     হয়তো ঠিকানাটি ভুল হয়েছে অথবা পৃষ্ঠাটি সরিয়ে ফেলা হয়েছে।
                 </p>
 
-              <Link
-    href="/"
-    className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800"
->
-    <span aria-hidden="true">⌂</span>
-    হোম পেজে ফিরে যান
-</Link>
+                <Link
+                    href="/"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800"
+                >
+                    <span aria-hidden="true">⌂</span>
+                    হোম পেজে ফিরে যান
+                </Link>
 
                 <div className="mt-10 border-t border-gray-200 pt-5 dark:border-gray-800">
                     <p className="text-sm text-gray-500 dark:text-gray-400">

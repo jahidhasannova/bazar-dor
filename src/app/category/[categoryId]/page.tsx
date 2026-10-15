@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -342,8 +341,8 @@ const CategoryPage = () => {
                             product.change.dir === "up"
                                 ? "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400"
                                 : product.change.dir === "down"
-                                  ? "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400"
-                                  : "bg-gray-50 text-gray-500 dark:bg-gray-800 dark:text-gray-400";
+                                    ? "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400"
+                                    : "bg-gray-50 text-gray-500 dark:bg-gray-800 dark:text-gray-400";
 
                         return (
                             <Link
@@ -388,8 +387,8 @@ const CategoryPage = () => {
                                             {product.change.dir === "up"
                                                 ? "▲"
                                                 : product.change.dir === "down"
-                                                  ? "▼"
-                                                  : "—"}
+                                                    ? "▼"
+                                                    : "—"}
                                         </span>
 
                                         {formatNumber(
