@@ -2,6 +2,7 @@ import NavLinks from "./NavLinks";
 import { Suspense } from "react";
 import { connection } from "next/server";
 import Link from "next/link";
+import Userinfo from "./ Userinfo";
 
 const HeaderDate = async () => {
   await connection();
@@ -20,7 +21,7 @@ const HeaderDate = async () => {
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900">
-      <div className="mx-auto max-w-7xl px-6 py-4">
+      <div className="mx-auto max-w-7xl px-6 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-green-700 text-2xl">
@@ -39,19 +40,9 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link href="/signin">
-              <button className="rounded-sm border border-green-700 px-5 py-2 font-medium text-green-700 transition-colors hover:bg-green-100 dark:text-green-400 dark:hover:bg-gray-800">
-                সাইন ইন
-              </button>
-            </Link>
-
-            <Link href="/signup">
-              <button className="rounded-sm bg-green-700 px-5 py-2 font-medium text-white transition-colors hover:bg-green-800">
-                সাইন আপ
-              </button>
-            </Link>
-
+            <Userinfo></Userinfo>
           </div>
+
         </div>
       </div>
 
