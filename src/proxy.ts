@@ -14,9 +14,14 @@ export async function proxy(request: NextRequest) {
 
     console.log(user)
 
-    if (!user) {
-        return NextResponse.redirect(new URL('/signin', request.url))
-    }
+    
+if (!user) {
+    const signInUrl = new URL("/signin", request.url);
+    signInUrl.searchParams.set("redirect", request.nextUrl.pathname);
+
+    return NextResponse.redirect(signInUrl);
+}
+
 
 }
 

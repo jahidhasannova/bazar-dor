@@ -1,50 +1,118 @@
-
 "use client";
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeSlash } from "@gravity-ui/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const SignInPage = () => {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get("redirect");
+
+        if (redirect === "/profile") {
+            toast.info("Please login to access your profile.");
+        } else if (redirect?.startsWith("/product/")) {
+            toast.info("Please login to access this product.");
+        }
+    }, []);
+
 
     const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
+
         const formData = new FormData(e.currentTarget);
         const user = Object.fromEntries(formData.entries());
 
-        const { data, error } = await authClient.signIn.email({
-            email: user.email as string,
-            password: user.password as string,
-        });
+        try {
+            const { data, error } = await authClient.signIn.email({
+                email: user.email as string,
+                password: user.password as string,
+            });
 
-        if (data) {
-            toast.success("সাইন ইন সফল হয়েছে!");
+            if (data) {
+                toast.success("সাইন ইন সফল হয়েছে!");
 
-            setTimeout(() => {
-                router.push("/");
-            }, 1000);
-        }
+                setTimeout(() => {
+                    router.push("/");
+                }, 1000);
 
-        if (error) {
-            console.log(error);
-            toast.error(error.message);
+                return;
+            }
+
+            if (error) {
+                console.log(error);
+                toast.error(error.message);
+            }
+
+            setIsSubmitting(false);
+        } catch {
+            toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+            setIsSubmitting(false);
         }
     };
 
     const handleSocialLogin = async (
         provider: "google" | "github",
     ) => {
-        await authClient.signIn.social({
-            provider,
-            callbackURL: "/",
-        });
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
+
+        try {
+            await authClient.signIn.social({
+                provider,
+                callbackURL: "/",
+            });
+        } catch {
+            toast.error("সাইন ইন করা যায়নি। আবার চেষ্টা করুন।");
+            setIsSubmitting(false);
+        }
     };
+
+    if (isSubmitting) {
+        return (
+            <div
+                role="status"
+                aria-label="সাইন ইন হচ্ছে"
+                className="flex flex-col justify-center items-center max-w-lg mx-auto mt-10 px-6 py-8 border border-gray-200 dark:border-gray-700 rounded-3xl bg-white dark:bg-gray-900 shadow-md dark:shadow-black/20 animate-pulse"
+            >
+                <div className="h-8 w-32 rounded bg-gray-200 dark:bg-gray-700" />
+
+                <div className="mt-4 h-4 w-64 max-w-full rounded bg-gray-200 dark:bg-gray-700" />
+
+                <div className="mt-8 w-full max-w-md space-y-5">
+                    <div className="h-4 w-36 rounded bg-gray-200 dark:bg-gray-700" />
+                    <div className="h-12 w-full rounded-lg bg-gray-200 dark:bg-gray-700" />
+
+                    <div className="h-4 w-44 rounded bg-gray-200 dark:bg-gray-700" />
+                    <div className="h-12 w-full rounded-lg bg-gray-200 dark:bg-gray-700" />
+
+                    <div className="h-11 w-36 rounded-lg bg-gray-200 dark:bg-gray-700" />
+
+                    <div className="h-4 w-48 max-w-full mx-auto rounded bg-gray-200 dark:bg-gray-700" />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div className="h-11 rounded-lg bg-gray-200 dark:bg-gray-700" />
+                        <div className="h-11 rounded-lg bg-gray-200 dark:bg-gray-700" />
+                    </div>
+                </div>
+
+                <span className="sr-only">সাইন ইন হচ্ছে...</span>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col justify-center items-center max-w-lg mx-auto mt-10 px-6 py-8 border border-gray-200 dark:border-gray-700 rounded-3xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-md dark:shadow-black/20">
@@ -81,7 +149,6 @@ const SignInPage = () => {
                             placeholder="Abcd@1234"
                         />
 
-
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
@@ -94,12 +161,12 @@ const SignInPage = () => {
                                 <EyeSlash className="size-5" />
                             )}
                         </button>
-
                     </div>
 
                     <button
                         type="submit"
-                        className="btn mt-4 w-full border-0 bg-green-500 hover:bg-green-700 sm:w-auto"
+                        disabled={isSubmitting}
+                        className="btn mt-4 w-full border-0 bg-green-500 hover:bg-green-700 disabled:opacity-60 sm:w-auto"
                     >
                         সাইন ইন করুন
                     </button>
@@ -120,7 +187,8 @@ const SignInPage = () => {
                 <button
                     type="button"
                     onClick={() => handleSocialLogin("github")}
-                    className="btn bg-black text-white border-black w-full"
+                    disabled={isSubmitting}
+                    className="btn bg-black text-white border-black w-full disabled:opacity-60"
                 >
                     <svg
                         aria-label="GitHub logo"
@@ -140,7 +208,8 @@ const SignInPage = () => {
                 <button
                     type="button"
                     onClick={() => handleSocialLogin("google")}
-                    className="btn bg-white text-black border-[#e5e5e5] w-full"
+                    disabled={isSubmitting}
+                    className="btn bg-white text-black border-[#e5e5e5] w-full disabled:opacity-60"
                 >
                     <svg
                         aria-label="Google logo"

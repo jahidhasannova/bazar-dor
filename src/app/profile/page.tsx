@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -17,7 +16,7 @@ import {
 import { toast } from "react-toastify";
 
 const ProfilePage = () => {
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
   const [show, setShow] = useState(false);
@@ -29,7 +28,7 @@ const ProfilePage = () => {
   } | null>(null);
 
   const handleUpdateProfile = async (
-    e: React.FormEvent<HTMLFormElement>
+    e: React.SubmitEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
     setMessage(null);
@@ -125,6 +124,48 @@ const ProfilePage = () => {
       setSigningOut(false);
     }
   };
+
+  if (isPending) {
+    return (
+      <main className="min-h-[calc(100vh-80px)] bg-gray-50 px-4 py-8 dark:bg-gray-950 transition-colors sm:py-12">
+        <div className="mx-auto max-w-2xl animate-pulse">
+          <div className="mb-7 space-y-3 text-center">
+            <div className="mx-auto h-8 w-48 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="mx-auto h-4 w-72 max-w-full rounded bg-gray-200 dark:bg-gray-800" />
+          </div>
+
+          <section className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
+            <div className="h-1.5 bg-gray-200 dark:bg-gray-800" />
+
+            <div className="p-5 sm:p-8">
+              <div className="flex flex-col items-center">
+                <div className="h-28 w-28 rounded-full bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-4 h-6 w-40 rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-3 h-4 w-52 max-w-full rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-5 h-8 w-36 rounded-full bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-5 h-10 w-32 rounded-lg bg-gray-200 dark:bg-gray-800" />
+              </div>
+
+              <div className="my-7 border-t border-gray-100 dark:border-gray-800" />
+
+              <div className="mb-5 h-6 w-40 rounded bg-gray-200 dark:bg-gray-800" />
+
+              <div className="rounded-xl border border-gray-200 p-4 dark:border-gray-800 sm:p-5">
+                <div className="h-4 w-16 rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-3 h-5 w-36 rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-5 h-10 w-32 rounded-lg bg-gray-200 dark:bg-gray-800" />
+              </div>
+
+              <div className="mt-4 rounded-xl border border-gray-200 p-4 dark:border-gray-800 sm:p-5">
+                <div className="h-4 w-28 rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-3 h-5 w-48 max-w-full rounded bg-gray-200 dark:bg-gray-800" />
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    );
+  }
 
   if (!user) {
     return (
