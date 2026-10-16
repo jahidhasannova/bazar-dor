@@ -12,7 +12,7 @@ const HeaderDate = async () => {
   });
 
   return (
-    <p className="text-sm text-gray-500 dark:text-gray-400">
+    <p className="text-xs text-gray-500 dark:text-gray-400 sm:text-sm">
       {date}
     </p>
   );
@@ -21,19 +21,25 @@ const HeaderDate = async () => {
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900">
-      <div className="mx-auto max-w-7xl px-6 py-2">
+      <div className="mx-auto max-w-7xl px-3 py-2 sm:px-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-green-700 text-2xl">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-green-700 text-xl sm:h-11 sm:w-11 sm:text-2xl">
               🛒
             </div>
 
             <div className="flex flex-col">
-              <div className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+              <div className="text-xl font-bold text-gray-800 dark:text-gray-100 sm:text-3xl">
                 বাজার দর
               </div>
 
-              <Suspense fallback={<p className="text-sm text-gray-500">তারিখ লোড হচ্ছে...</p>}>
+              <Suspense
+                fallback={
+                  <p className="text-sm text-gray-500">
+                    তারিখ লোড হচ্ছে...
+                  </p>
+                }
+              >
                 <HeaderDate />
               </Suspense>
             </div>
@@ -42,13 +48,12 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <Userinfo></Userinfo>
           </div>
-
         </div>
       </div>
 
       <div className="h-px w-full bg-gray-200 dark:bg-gray-700"></div>
 
-      <div className="mx-auto max-w-7xl px-6 py-4">
+      <div className="mx-auto max-w-7xl px-3 py-2 sm:px-6 sm:py-4">
         <Suspense
           fallback={
             <div className="flex items-center gap-2 text-sm text-green-700 dark:text-green-400">

@@ -1,6 +1,9 @@
+import { connection } from "next/server";
 import Image from "next/image";
 
-const Hero = () => {
+const Hero = async () => {
+  await connection();
+
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });

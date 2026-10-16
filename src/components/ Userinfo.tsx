@@ -47,9 +47,8 @@ const Userinfo = () => {
                         </span>
 
                         <svg
-                            className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
-                                isOpen ? "rotate-180" : ""
-                            }`}
+                            className={`h-4 w-4 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+                                }`}
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -113,19 +112,21 @@ const Userinfo = () => {
                     )}
                 </div>
             ) : (
+
                 <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
                     <Link href="/signin">
-                        <button className="rounded-sm border border-green-700 px-5 py-2 font-medium text-green-700 transition-colors hover:bg-green-100 dark:text-green-400 dark:hover:bg-gray-800">
+                        <button className="rounded-sm border border-green-700 px-2.5 py-1.5 text-sm font-medium text-green-700 transition-colors hover:bg-green-100 dark:text-green-400 dark:hover:bg-gray-800 sm:px-5 sm:py-2 sm:text-base">
                             সাইন ইন
                         </button>
                     </Link>
 
                     <Link href="/signup">
-                        <button className="rounded-sm bg-green-700 px-5 py-2 font-medium text-white transition-colors hover:bg-green-800">
+                        <button className="rounded-sm bg-green-700 px-2.5 py-1.5 text-sm font-medium text-white transition-colors hover:bg-green-800 sm:px-5 sm:py-2 sm:text-base">
                             সাইন আপ
                         </button>
                     </Link>
                 </div>
+
             )}
         </div>
     );

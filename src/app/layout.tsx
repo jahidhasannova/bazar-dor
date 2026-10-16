@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Marquee from "@/components/Marquee";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import { Suspense } from "react";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["latin"],
@@ -24,7 +25,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
       <body className="flex min-h-screen flex-col bg-green-50/50">
         <Header />
-        <Marquee />
+        <Suspense
+          fallback={
+            <div className="py-3 text-center text-sm text-green-700">
+              বাজারদর লোড হচ্ছে...
+            </div>
+          }
+        >
+          <Marquee />
+        </Suspense>
 
         <main className="flex-1">
           {children}

@@ -172,7 +172,7 @@ const ProfilePage = () => {
       <main className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-gray-50 px-4 dark:bg-gray-950">
         <div className="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm dark:border-gray-800 dark:bg-gray-900">
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            আপনার প্রোফাইলের তথ্য লোড হচ্ছে...
+              আপনার প্রোফাইল দেখতে প্রথমে সাইন ইন করুন।
           </p>
         </div>
       </main>
