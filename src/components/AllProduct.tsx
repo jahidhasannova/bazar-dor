@@ -55,16 +55,15 @@ const getUnit = (unit: string, category?: string) => {
 const ProductCard = ({ product }: { product: Product }) => {
     const changeColor =
         product.change.dir === "up"
-            ? "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400"
+            ? "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400"
             : product.change.dir === "down"
-                ? "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400"
+                ? "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400"
                 : "bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-300";
-
     const changeIcon =
         product.change.dir === "up"
-            ? "▼"
+            ? "▲"
             : product.change.dir === "down"
-                ? "▲"
+                ? "▼"
                 : "—";
 
     return (
@@ -127,8 +126,9 @@ const ProductSection = ({
             <span
                 className={
                     icon === "▲"
-                        ? "text-green-700 dark:text-green-400"
-                        : "text-red-600 dark:text-red-400"
+                        ? "text-red-600 dark:text-red-400"
+                        : "text-green-700 dark:text-green-400"
+                        
                 }
             >
                 {icon}

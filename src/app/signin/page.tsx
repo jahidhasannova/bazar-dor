@@ -70,6 +70,8 @@ const SignInPage = () => {
 
         setIsSubmitting(true);
 
+        // toast.info(`${provider} দিয়ে সাইন ইন করা হচ্ছে...`);
+
         try {
             await authClient.signIn.social({
                 provider,
