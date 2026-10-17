@@ -62,9 +62,9 @@ const ProductCard = ({ product }: { product: Product }) => {
 
     const changeIcon =
         product.change.dir === "up"
-            ? "▲"
+            ? "▼"
             : product.change.dir === "down"
-                ? "▼"
+                ? "▲"
                 : "—";
 
     return (
