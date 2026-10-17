@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 বাজার দর | BazarDor
 
-## Getting Started
+<p align="center">
+  <img src="./public/bazar-hero.png" alt="BazarDor Banner" width="100%" />
+</p>
 
-First, run the development server:
+<p align="center">
+  <b>প্রয়োজনীয় পণ্যের দাম এক নজরে।</b>
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<p align="center">
+  <a href="https://bazar-dor-omega-orpin.vercel.app/">🌐 Live Demo</a>
+</p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📖 About the Project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**BazarDor (বাজার দর)** is a web application designed to help users explore essential daily product prices in Bangladesh. It provides product details and market-wise price information through a simple, responsive, and user-friendly interface.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features
 
-## Learn More
+- **Product Price Overview:** Browse essential daily product prices.
+- **Category-Based Browsing:** Explore products organized into different categories.
+- **Product Details:** View product information, units, and available price details.
+- **Market-Wise Price Comparison:** Compare minimum, maximum, and average prices across markets.
+- **Responsive Design:** Enjoy a user-friendly experience on desktop, tablet, and mobile devices.
+- **Loading Skeletons:** View loading placeholders while product data is being fetched.
+- **User Authentication:** Sign in and create an account using Better Auth.
+- **Social Login:** Sign in using Google or GitHub.
+- **Protected Routes:** Restrict selected pages to authenticated users.
+- **User Profile:** Access and manage profile information.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js** — React framework
+- **React** — User interface
+- **TypeScript** — Type-safe development
+- **Tailwind CSS** — Styling and responsive layouts
+- **Better Auth** — Authentication
+- **MongoDB** — Database integration
+- **React Toastify** — Toast notifications
+- **REST API** — Product and category data
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Getting Started
 
-## Deploy on Vercel
+### Prerequisites
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Node.js
+- npm
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/jahidhasannova/bazar-dor.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd bazar-dor
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Create a `.env` file and configure the required environment variables for authentication and database connectivity.
+
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🎯 Project Purpose
+
+BazarDor aims to make essential product prices easier to explore and compare through a simple and accessible web application.
+
+## 👨‍💻 Developer
+
+**Jahid Hasan**
+
+- GitHub: [jahidhasannova](https://github.com/jahidhasannova)
+
+## 🌐 Live Demo
+
+Explore the deployed application:
+
+**[https://bazar-dor-omega-orpin.vercel.app/](https://bazar-dor-omega-orpin.vercel.app/)**
+
+---
+
+*Note: Market prices are indicative and may vary depending on market conditions.*
