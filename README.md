@@ -1,7 +1,7 @@
-# 🛒 বাজার দর | BazarDor
+# 🛒 বাজার দর | Bazar-Dor
 
 <p align="center">
-  <img src="./public/bazar-hero.png" alt="BazarDor Banner" width="100%" />
+  <img src="./public/bazar-hero.png" alt="Bazar-Dor Banner" width="600" />
 </p>
 
 <p align="center">
@@ -14,20 +14,20 @@
 
 ## 📖 About the Project
 
-**BazarDor (বাজার দর)** is a web application designed to help users explore essential daily product prices in Bangladesh. It provides product details and market-wise price information through a simple, responsive, and user-friendly interface.
+**Bazar-Dor (বাজার দর)** is a web application that helps users explore essential daily product prices in Bangladesh. It provides product details and market-wise price information through a simple and responsive interface.
 
 ## ✨ Features
 
-- **Product Price Overview:** Browse essential daily product prices.
-- **Category-Based Browsing:** Explore products organized into different categories.
-- **Product Details:** View product information, units, and available price details.
+- **Product Price Overview:** Browse the prices of essential daily products in Bangladesh.
+- **Category-Based Browsing:** Explore products by category.
+- **Product Details:** View product information, measurement units, and available prices.
 - **Market-Wise Price Comparison:** Compare minimum, maximum, and average prices across markets.
-- **Responsive Design:** Enjoy a user-friendly experience on desktop, tablet, and mobile devices.
-- **Loading Skeletons:** View loading placeholders while product data is being fetched.
-- **User Authentication:** Sign in and create an account using Better Auth.
+- **User Authentication:** Create an account and sign in using email and password.
 - **Social Login:** Sign in using Google or GitHub.
-- **Protected Routes:** Restrict selected pages to authenticated users.
-- **User Profile:** Access and manage profile information.
+- **Protected Routes:** Access restricted pages after signing in.
+- **User Profile Management:** View and update profile information.
+- **Responsive Design:** Use the application on desktop, tablet, and mobile devices.
+- **Loading Skeletons:** See loading placeholders while product data is being fetched.
 
 ## 🛠️ Technologies Used
 
@@ -79,7 +79,7 @@
 
 ## 🎯 Project Purpose
 
-BazarDor aims to make essential product prices easier to explore and compare through a simple and accessible web application.
+Bazar-Dor aims to make essential product prices easier to explore and compare through a simple and accessible web application.
 
 ## 👨‍💻 Developer
 
@@ -89,9 +89,7 @@ BazarDor aims to make essential product prices easier to explore and compare thr
 
 ## 🌐 Live Demo
 
-Explore the deployed application:
-
-**[https://bazar-dor-omega-orpin.vercel.app/](https://bazar-dor-omega-orpin.vercel.app/)**
+Explore the deployed application: [Bazar-Dor](https://bazar-dor-omega-orpin.vercel.app/)
 
 ---
 
